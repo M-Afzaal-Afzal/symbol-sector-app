@@ -26,7 +26,7 @@ const getLocale = () => {
     locale =
       localePackage[
         LOCALE_SHORTHANDS[i18n.language || window.localStorage.i18nextLng]
-      ];
+        ];
   });
 };
 
@@ -101,7 +101,7 @@ export const formatNumber = (value, option = '', statistic) => {
     return '-';
   } else if (option === 'long') {
     return numberFormatter.format(
-      Math.abs(value) < 1 ? value : Math.round(value)
+      Math.abs(value) < 1 ? value : Math.round(value),
     );
   } else if (option === 'short') {
     return abbreviateNumber(value);
@@ -118,7 +118,7 @@ export const capitalize = (s) => {
 };
 
 export const toTitleCase = (str) => {
-  return str.replace(/\w\S*/g, function (txt) {
+  return str.replace(/\w\S*/g, function(txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 };
@@ -132,7 +132,7 @@ export const getStatistic = (
     normalizedByPopulationPer = null,
     movingAverage = false,
     canBeNaN = false,
-  } = {}
+  } = {},
 ) => {
   // TODO: Replace delta with daily to remove ambiguity
   //       Or add another type for daily/delta
@@ -143,7 +143,7 @@ export const getStatistic = (
         !data?.meta?.tested?.date ||
         differenceInDays(
           parseIndiaDate(expiredDate),
-          parseIndiaDate(data.meta.tested.date)
+          parseIndiaDate(data.meta.tested.date),
         ) > TESTED_EXPIRING_DAYS
       ) {
         return 0;
@@ -199,8 +199,8 @@ export const getStatistic = (
     val =
       type === 'total'
         ? 100 *
-          ((confirmedDeltaLastWeek - confirmedDeltaTwoWeeksAgo) /
-            confirmedDeltaTwoWeeksAgo)
+        ((confirmedDeltaLastWeek - confirmedDeltaTwoWeeksAgo) /
+          confirmedDeltaTwoWeeksAgo)
         : 0;
   } else if (statistic === 'population') {
     val = type === 'total' ? data?.meta?.population : 0;

@@ -1,5 +1,4 @@
 import TableLoader from './loaders/Table';
-
 import {
   DATA_API_ROOT,
   DISTRICT_START_DATE,
@@ -18,18 +17,18 @@ import {
   retry,
 } from '../utils/commonFunctions';
 
-const DeltaBarGraph = lazy(() => retry(() => import('./DeltaBarGraph')));
 import classnames from 'classnames';
 import {addDays, formatISO, max} from 'date-fns';
 import {useMemo, useRef, useState, lazy, Suspense} from 'react';
 import {Helmet} from 'react-helmet';
 import {useLocation, useParams} from 'react-router-dom';
 import {useLocalStorage, useSessionStorage, useWindowSize} from 'react-use';
-import {SmileyIcon} from '@primer/octicons-react';
 import useSWR from 'swr';
 import {useTranslation} from 'react-i18next';
 import FeelingCard from './FeelingCard/FeelingCard';
 
+import {SmileyIcon} from '@primer/octicons-react';
+const DeltaBarGraph = lazy(() => retry(() => import('./DeltaBarGraph')));
 const Actions = lazy(() => retry(() => import('./Actions')));
 const Footer = lazy(() => retry(() => import('./Footer')));
 const Level = lazy(() => retry(() => import('./Level')));
@@ -308,7 +307,7 @@ function Home() {
           style={{minHeight: '4rem'}}
         >
 
-          <FeelingCard/>
+          <FeelingCard />
 
           <div style={{
             display: 'grid',
