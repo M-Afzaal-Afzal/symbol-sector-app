@@ -214,8 +214,8 @@ export const INDIA_ISO_SUFFIX = 'T00:00:00+05:30';
 export const SPRING_CONFIG_NUMBERS = {clamp: true, precision: 1};
 
 export const TIMESERIES_CHART_TYPES = {
-  total: 'Cumulative',
-  delta: 'Daily',
+  total: 'Symbol',
+  delta: 'Sector',
 };
 
 export const TIMESERIES_LOOKBACK_DAYS = [null, 90, 30];

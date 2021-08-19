@@ -5,14 +5,16 @@ import {
   SLIDE_OUT_MOBILE,
 } from '../animations';
 import locales from '../i18n/locales.json';
+import {useAuth0} from '@auth0/auth0-react';
 
 import {useState, useCallback, useRef} from 'react';
-import {Book, HelpCircle, Home, Moon, Sun, Phone} from 'react-feather';
+import {Book, HelpCircle, Home, Moon, Sun, Phone,Rss} from 'react-feather';
 import {useTranslation} from 'react-i18next';
 import {Link} from 'react-router-dom';
 import {useTransition, animated} from 'react-spring';
 import {useLockBodyScroll, usePageLeave, useWindowSize} from 'react-use';
 import useDarkMode from 'use-dark-mode';
+import {Box} from '@chakra-ui/react';
 
 function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
   const {i18n, t} = useTranslation();
@@ -47,24 +49,32 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
   }, [windowSize.width]);
 
   const handleLanguageSwitcher = useCallback(() => {
-    if (expand) setExpand(false);
-    setShowLanguageSwitcher(!showLanguageSwitcher);
+    // if (expand) setExpand(false);
+    // setShowLanguageSwitcher(!showLanguageSwitcher);
   }, [expand, showLanguageSwitcher, setExpand, setShowLanguageSwitcher]);
 
+  // LOGIN WIHT OAUTH
+  const {loginWithRedirect} = useAuth0();
+
   return navbarTransition((style, item) => (
-    <animated.div className="Navbar" {...{style}}>
-      <div className="navbar-left" onClick={handleLanguageSwitcher}>
-        {locales[currentLanguage]}
+    <animated.div className='Navbar' {...{style}}>
+      <div className='navbar-left' >
+
+        <Box as={'a'} href={'https://mafzaalafzal.substack.com/subscribe'}>
+          {/*{'Subscribe'}*/}
+          <Rss/>
+          {/*{darkMode.value ? <Sun color={'#ffc107'} /> : <Moon />}*/}
+        </Box>
       </div>
 
-      <div className="navbar-middle">
-        <Link to="/" onClick={setExpand.bind(this, false)}>
+      <div className='navbar-middle'>
+        <Link to='/' onClick={setExpand.bind(this, false)}>
           Covid19<span>India</span>
         </Link>
       </div>
 
       <div
-        className="navbar-right"
+        className='navbar-right'
         onMouseEnter={handleMouseEnter}
         {...(windowSize.width < 769 && {
           onClick: setExpand.bind(this, !expand),
@@ -76,22 +86,31 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
 
         {windowSize.width >= 769 && (
           <>
-            <Link to="/">
+            <Link to='/'>
               <span>
                 <Home {...activeNavIcon('/')} />
               </span>
             </Link>
-            <Link to="/blog">
+            <Link to='/'>
               <span>
-                <Book {...activeNavIcon('/blog')} />
+                <Book onClick={() => {
+                  loginWithRedirect()
+                    .then((res) => {
+                      console.log(res);
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
+                }}
+                      {...activeNavIcon('/')} />
               </span>
             </Link>
-            <Link to="/about">
+            <Link to='/alert'>
               <span>
-                <HelpCircle {...activeNavIcon('/about')} />
+                <HelpCircle {...activeNavIcon('/alert')} />
               </span>
             </Link>
-            <Link to="/resources">
+            <Link to='/resources'>
               <span>
                 <Phone {...activeNavIcon('/resources')} />
               </span>
@@ -109,7 +128,7 @@ function Navbar({pages, showLanguageSwitcher, setShowLanguageSwitcher}) {
             <animated.div {...{style}}>
               <Expand {...{pages, setExpand, darkMode, windowSize}} />
             </animated.div>
-          )
+          ),
       )}
     </animated.div>
   ));
@@ -124,23 +143,25 @@ function Expand({pages, setExpand, darkMode, windowSize}) {
   }, [setExpand, windowSize.width]);
 
   return (
-    <div className="expand" ref={expandElement} onMouseLeave={handleMouseLeave}>
+    <div className='expand' ref={expandElement} onMouseLeave={handleMouseLeave}>
       {pages.map((page, i) => {
         if (page.showInNavbar === true) {
           return (
-            <Link
-              to={page.pageLink}
-              key={i}
-              {...(windowSize.width < 769 && {
-                onClick: setExpand.bind(this, false),
-              })}
-            >
+            <Box height={'5rem'}>
+              <Link
+                to={page.pageLink}
+                key={i}
+                {...(windowSize.width < 769 && {
+                  onClick: setExpand.bind(this, false),
+                })}
+              >
               <span
                 {...navLinkProps(page.pageLink, page.animationDelayForNavbar)}
               >
                 {t(page.displayName)}
               </span>
-            </Link>
+              </Link>
+            </Box>
           );
         }
         return null;
@@ -148,7 +169,7 @@ function Expand({pages, setExpand, darkMode, windowSize}) {
 
       {windowSize.width < 769 && <SunMoon {...{darkMode}} />}
 
-      <div className="expand-bottom">
+      <div className='expand-bottom'>
         <h5>{t('A crowdsourced initiative.')}</h5>
       </div>
     </div>
@@ -169,7 +190,7 @@ const activeNavIcon = (path) => ({
 
 const SunMoon = ({darkMode}) => {
   return (
-    <div className="SunMoon" onClick={darkMode.toggle}>
+    <div className='SunMoon' onClick={darkMode.toggle}>
       <div>{darkMode.value ? <Sun color={'#ffc107'} /> : <Moon />}</div>
     </div>
   );

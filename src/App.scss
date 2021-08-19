@@ -155,7 +155,7 @@ h6 {
   .navbar-left {
     color: $gray-mid;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     padding: 1.5rem;
     text-align: center;
@@ -184,7 +184,6 @@ h6 {
     font-weight: 600;
     padding: 1.5rem;
     text-align: center;
-    width: 3rem;
   }
 
   .language-toggle {
@@ -200,11 +199,13 @@ h6 {
     flex-direction: column;
     width: 100vw;
     z-index: 9999;
+    height: 100vh;
 
     & > * {
       border-bottom: 1px solid $gray-light;
       border-top: 1px solid $gray-light;
       padding: 1.5rem;
+      margin-bottom: 1.7rem;
       transition: all 0.15s ease-in-out;
 
       &:hover {
@@ -906,7 +907,7 @@ h6 {
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
     color: $gray;
     font-size: 1rem;
-    height: 2rem;
+    //height: 2rem;
     outline: none;
     padding: 1rem;
     padding-left: 3rem;
@@ -965,6 +966,51 @@ h6 {
 
     &:hover {
       background: $gray-hover !important;
+    }
+
+    &.is-expand {
+      right: 0.75rem;
+    }
+
+    svg {
+      align-self: center;
+      position: absolute;
+      stroke: $gray-mid;
+      stroke-width: 3;
+      width: 12px;
+    }
+
+    &.custom {
+      background: $pink-light !important;
+      pointer-events: none;
+      z-index: 0;
+
+      svg {
+        stroke: $pink !important;
+      }
+    }
+  }
+
+  .add-filter-button {
+    background: #191A1E !important;
+    color: white;
+    font-weight: lighter;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    //height: 20px;
+    justify-content: center;
+    position: absolute;
+    right: -3.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-in-out;
+    //width: 20px;
+    padding: 8px 12px;
+
+    &:hover {
+      background: #3e414b !important;
     }
 
     &.is-expand {
@@ -4553,6 +4599,9 @@ footer {
       margin-top: auto;
       order: 3;
       text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .navbar-middle {
@@ -4591,7 +4640,7 @@ footer {
     .expand {
       background: $gray-light-opaque;
       flex-direction: column;
-      height: calc(100% - 5.5rem);
+      height: calc(100% );
       padding-left: 0;
       padding-top: 5.75rem;
       top: 0;

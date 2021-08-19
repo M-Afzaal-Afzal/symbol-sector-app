@@ -213,6 +213,7 @@ function TimeseriesExplorer({
         {expanded: expandTable}
       )}
       style={{
+        marginTop: '8.5rem',
         display:
           anchor && anchor !== 'timeseries' && (!expandTable || width < 769)
             ? 'none'
@@ -221,22 +222,22 @@ function TimeseriesExplorer({
       ref={explorerElement}
     >
       <div className="timeseries-header">
-        <div
-          className={classnames('anchor', 'fadeInUp', {
-            stickied: anchor === 'timeseries',
-          })}
-          style={{
-            display: expandTable && width >= 769 ? 'none' : '',
-          }}
-          onClick={
-            setAnchor &&
-            setAnchor.bind(this, anchor === 'timeseries' ? null : 'timeseries')
-          }
-        >
-          <PinIcon />
-        </div>
+        {/*<div*/}
+        {/*  className={classnames('anchor', 'fadeInUp', {*/}
+        {/*    stickied: anchor === 'timeseries',*/}
+        {/*  })}*/}
+        {/*  style={{*/}
+        {/*    display: expandTable && width >= 769 ? 'none' : '',*/}
+        {/*  }}*/}
+        {/*  onClick={*/}
+        {/*    setAnchor &&*/}
+        {/*    setAnchor.bind(this, anchor === 'timeseries' ? null : 'timeseries')*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  <PinIcon />*/}
+        {/*</div>*/}
 
-        <h1>{t('Spread Trends')}</h1>
+        <h1>{t('Symbol & Sector Trends')}</h1>
         <div className="tabs">
           {Object.entries(TIMESERIES_CHART_TYPES).map(
             ([ctype, value], index) => (
@@ -252,53 +253,53 @@ function TimeseriesExplorer({
         </div>
 
         <div className="timeseries-options">
-          <div className="scale-modes">
-            <label className="main">{`${t('Scale Modes')}:`}</label>
-            <div className="timeseries-mode">
-              <label htmlFor="timeseries-mode">{t('Uniform')}</label>
-              <input
-                id="timeseries-mode"
-                type="checkbox"
-                className="switch"
-                checked={isUniform}
-                aria-label={t('Checked by default to scale uniformly.')}
-                onChange={setIsUniform.bind(this, !isUniform)}
-              />
-            </div>
-            <div
-              className={`timeseries-mode ${
-                chartType !== 'total' ? 'disabled' : ''
-              }`}
-            >
-              <label htmlFor="timeseries-logmode">{t('Logarithmic')}</label>
-              <input
-                id="timeseries-logmode"
-                type="checkbox"
-                checked={chartType === 'total' && isLog}
-                className="switch"
-                disabled={chartType !== 'total'}
-                onChange={setIsLog.bind(this, !isLog)}
-              />
-            </div>
-          </div>
+          {/*<div className="scale-modes">*/}
+          {/*  <label className="main">{`${t('Scale Modes')}:`}</label>*/}
+          {/*  <div className="timeseries-mode">*/}
+          {/*    <label htmlFor="timeseries-mode">{t('Uniform')}</label>*/}
+          {/*    <input*/}
+          {/*      id="timeseries-mode"*/}
+          {/*      type="checkbox"*/}
+          {/*      className="switch"*/}
+          {/*      checked={isUniform}*/}
+          {/*      aria-label={t('Checked by default to scale uniformly.')}*/}
+          {/*      onChange={setIsUniform.bind(this, !isUniform)}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*  <div*/}
+          {/*    className={`timeseries-mode ${*/}
+          {/*      chartType !== 'total' ? 'disabled' : ''*/}
+          {/*    }`}*/}
+          {/*  >*/}
+          {/*    <label htmlFor="timeseries-logmode">{t('Logarithmic')}</label>*/}
+          {/*    <input*/}
+          {/*      id="timeseries-logmode"*/}
+          {/*      type="checkbox"*/}
+          {/*      checked={chartType === 'total' && isLog}*/}
+          {/*      className="switch"*/}
+          {/*      disabled={chartType !== 'total'}*/}
+          {/*      onChange={setIsLog.bind(this, !isLog)}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*</div>*/}
 
-          <div
-            className={`timeseries-mode ${
-              chartType === 'total' ? 'disabled' : ''
-            } moving-average`}
-          >
-            <label htmlFor="timeseries-moving-average">
-              {t('7 day Moving Average')}
-            </label>
-            <input
-              id="timeseries-moving-average"
-              type="checkbox"
-              checked={chartType === 'delta' && isMovingAverage}
-              className="switch"
-              disabled={chartType !== 'delta'}
-              onChange={setIsMovingAverage.bind(this, !isMovingAverage)}
-            />
-          </div>
+          {/*<div*/}
+          {/*  className={`timeseries-mode ${*/}
+          {/*    chartType === 'total' ? 'disabled' : ''*/}
+          {/*  } moving-average`}*/}
+          {/*>*/}
+          {/*  <label htmlFor="timeseries-moving-average">*/}
+          {/*    {t('7 day Moving Average')}*/}
+          {/*  </label>*/}
+          {/*  <input*/}
+          {/*    id="timeseries-moving-average"*/}
+          {/*    type="checkbox"*/}
+          {/*    checked={chartType === 'delta' && isMovingAverage}*/}
+          {/*    className="switch"*/}
+          {/*    disabled={chartType !== 'delta'}*/}
+          {/*    onChange={setIsMovingAverage.bind(this, !isMovingAverage)}*/}
+          {/*  />*/}
+          {/*</div>*/}
         </div>
       </div>
       {dropdownRegions && (
