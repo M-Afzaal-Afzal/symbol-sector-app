@@ -191,20 +191,20 @@ function Home() {
     );
   }, [stateData]);
 
-  const districts = Object.keys(
-    ((!noDistrictData || !statisticConfig.hasPrimary) &&
-      stateData?.districts) ||
-    {},
-  );
+  // const districts = Object.keys(
+  //   ((!noDistrictData || !statisticConfig.hasPrimary) &&
+  //     stateData?.districts) ||
+  //   {},
+  // );
 
-  const handleSort = (districtNameA, districtNameB) => {
-    const districtA = stateData.districts[districtNameA];
-    const districtB = stateData.districts[districtNameB];
-    return (
-      getStatistic(districtB, 'total', mapStatistic) -
-      getStatistic(districtA, 'total', mapStatistic)
-    );
-  };
+  // const handleSort = (districtNameA, districtNameB) => {
+  //   const districtA = stateData.districts[districtNameA];
+  //   const districtB = stateData.districts[districtNameB];
+  //   return (
+  //     getStatistic(districtB, 'total', mapStatistic) -
+  //     getStatistic(districtA, 'total', mapStatistic)
+  //   );
+  // };
 
   const lookback = showAllDistricts ? (window.innerWidth >= 540 ? 10 : 8) : 6;
 
